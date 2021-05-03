@@ -1,6 +1,7 @@
 import cv2
+from Common.utils import put_string
 
-capture = cv2.VideoCapture("images/video_file2.avi")
+capture = cv2.VideoCapture("images/video.mp4")
 if capture.isOpened() == False: raise Exception("동영상 파일 개방 안됨")
 
 fps = 29.97                                 # 초당 프레임 수
@@ -36,6 +37,8 @@ while True:                                 # frame 증가에 따라 화면 밝�
         cv2.add(red, 100, red)          # red 채널 밝기 증가
 
     frame = cv2.merge([blue, green, red])   # 단일 채널 영상 합성
+
+    put_string(frame, "frame_cnt: ", (20, 320), frame_cnt)
 
     writer.write(frame)     # 프레임을 동영상으로 저장
 
